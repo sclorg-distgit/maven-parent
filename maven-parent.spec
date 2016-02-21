@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        20
-Release:        5.10%{?dist}
+Release:        5.11%{?dist}
 Summary:        Apache Maven parent POM
 License:        ASL 2.0
 URL:            http://maven.apache.org
@@ -12,7 +12,7 @@ Source0:        http://repo1.maven.org/maven2/org/apache/maven/%{pkg_name}/%{ver
 BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-apache-parent
+BuildRequires:  %{?scl_prefix}apache-parent
 
 %description
 Apache Maven parent POM file used by other Maven projects.
@@ -21,13 +21,13 @@ Apache Maven parent POM file used by other Maven projects.
 %setup -q -n %{pkg_name}-%{version}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_build
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -37,6 +37,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 20-5.11
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 20-5.10
 - maven33 rebuild
 
