@@ -3,8 +3,8 @@
 %{?maven_find_provides_and_requires}
 
 Name:           %{?scl_prefix}%{pkg_name}
-Version:        20
-Release:        5.11%{?dist}
+Version:        27
+Release:        1.1%{?dist}
 Summary:        Apache Maven parent POM
 License:        ASL 2.0
 URL:            http://maven.apache.org
@@ -19,6 +19,12 @@ Apache Maven parent POM file used by other Maven projects.
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
+%{?scl:scl enable %{scl} - <<"EOF"}
+set -e -x
+%pom_remove_plugin :maven-enforcer-plugin
+%pom_remove_plugin :maven-checkstyle-plugin
+%pom_remove_plugin :apache-rat-plugin
+%{?scl:EOF}
 
 %build
 %{?scl:scl enable %{scl} - <<"EOF"}
@@ -37,41 +43,38 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
-* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 20-5.11
-- maven33 rebuild #2
+* Mon Jan 18 2016 Michal Srb <msrb@redhat.com> - 27-1.1
+- Prepare for SCL build
 
-* Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 20-5.10
-- maven33 rebuild
+* Thu Sep 24 2015 Mikolaj Izdebski <mizdebsk@redhat.com> - 27-1
+- Update to upstream version 27
 
-* Thu Jan 15 2015 Michal Srb <msrb@redhat.com> - 20-5.9
-- Fix directory ownership
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 26-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
-* Tue Jan 13 2015 Michael Simacek <msimacek@redhat.com> - 20-5.8
-- Mass rebuild 2015-01-13
+* Mon Nov 17 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 26-1
+- Update to upstream version 26
 
-* Tue Jan 06 2015 Michael Simacek <msimacek@redhat.com> - 20-5.7
-- Mass rebuild 2015-01-06
+* Thu Oct 23 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 25-1
+- Update to upstream version 25
 
-* Mon May 26 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 20-5.6
-- Mass rebuild 2014-05-26
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 24-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
-* Wed Feb 19 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 20-5.5
-- Mass rebuild 2014-02-19
+* Wed May 28 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 24-2
+- Rebuild to regenerate Maven auto-requires
 
-* Tue Feb 18 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 20-5.4
-- Mass rebuild 2014-02-18
+* Wed Apr  2 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 24-1
+- Update to upstream version 24
 
-* Fri Feb 14 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 20-5.3
-- SCL-ize requires and build-requires
+* Mon Mar 10 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 23-1
+- Update to upstream version 23
 
-* Thu Feb 13 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 20-5.2
-- Rebuild to regenerate auto-requires
+* Fri Sep 20 2013 Mikolaj Izdebski <mizdebsk@redhat.com> - 20-6
+- Rebuild to regenerate Maven provides
 
-* Tue Feb 11 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 20-5.1
-- First maven30 software collection build
-
-* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 20-5
-- Mass rebuild 2013-12-27
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 20-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
 * Mon Feb 11 2013 Mikolaj Izdebski <mizdebsk@redhat.com> - 20-4
 - Build with xmvn
