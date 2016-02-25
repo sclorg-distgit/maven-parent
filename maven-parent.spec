@@ -4,14 +4,14 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        27
-Release:        1.1%{?dist}
+Release:        1.2%{?dist}
 Summary:        Apache Maven parent POM
 License:        ASL 2.0
 URL:            http://maven.apache.org
 Source0:        http://repo1.maven.org/maven2/org/apache/maven/%{pkg_name}/%{version}/%{pkg_name}-%{version}-source-release.zip
 BuildArch:      noarch
 
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}apache-parent
 
 %description
@@ -43,6 +43,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 27-1.2
+- Fix BR on maven-local & co.
+
 * Mon Jan 18 2016 Michal Srb <msrb@redhat.com> - 27-1.1
 - Prepare for SCL build
 
